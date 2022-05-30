@@ -1,0 +1,19 @@
+version: '3'
+services:
+  reverse:
+    image: nginx
+    restart: always
+    container_name: reverse
+    volumes:
+      - /home/dohttps/nginx/data:/usr/share/nginx/html:rw
+      - /home/dohttps/nginx/config/nginx.conf:/etc/nginx/nginx.conf/:rw
+      - /home/dohttps/nginx/config/conf.d/default.conf:/etc/nginx/conf.d/default.conf:rw
+      - /home/dohttps/nginx/logs:/var/log/nginx/:rw
+      - /home/dohttps/nginx/ssl:/ssl/:rw
+    ports:
+      - "80:80"
+      - "443:443"
+networks:
+  default:
+    external:
+      name: helio-network
